@@ -18,6 +18,7 @@ jobs:
       - name: Fetch remote branches of submodule
         working-directory: ext/devops-sandbox-rusefi
         run: |
+          git fetch origin '+refs/heads/*:refs/remotes/origin/*'
           git branch -r
 
       - name: Print submodule branches
