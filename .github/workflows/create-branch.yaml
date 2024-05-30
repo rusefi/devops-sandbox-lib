@@ -30,5 +30,5 @@ jobs:
           git fetch origin '+refs/heads/*:refs/remotes/origin/*'
           OUT=$(git branch -r | grep ${{toJSON(inputs.branch_name)}})
           echo "OUT1=$OUT"
-          OUT=$(git branch -r | grep "heads/${{toJSON(inputs.branch_name)}}")
+          OUT=$(git branch -r | grep "origin/${{toJSON(inputs.branch_name)}}")
           echo "OUT2=$OUT"
