@@ -41,5 +41,7 @@ jobs:
 
       - name: Fetch remote branches of submodule
         run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub git update Action"
           bash ext/devops-sandbox-rusefi/misc/git_scripts/git_switch_submodule_branch.sh ext/devops-sandbox-rusefi ${{toJSON(inputs.branch_name)}} 
 
