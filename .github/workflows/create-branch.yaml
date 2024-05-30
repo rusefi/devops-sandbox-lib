@@ -42,7 +42,8 @@ jobs:
 
       - name: Create Branch
         run: |
-          echo Creating branch ${{toJSON(inputs.branch_name)}}
+          echo Creating branch1  ${{toJSON(inputs.branch_name)}}
+          echo Creating branch2 "${{toJSON(inputs.branch_name)}}"
           git checkout -b ${{toJSON(inputs.branch_name)}}
           git status
 
