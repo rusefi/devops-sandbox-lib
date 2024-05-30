@@ -32,3 +32,9 @@ jobs:
           echo "OUT1=$OUT"
           OUT=$(git branch -r | grep "origin/${{toJSON(inputs.branch_name)}}")
           echo "OUT2=$OUT"
+          if echo "$OUT" | grep origin; then
+            echo "Branch exists! [$OUT]"
+          else
+            echo "${{toJSON(inputs.branch_name)}}: branch not found"
+            exit 1
+          fi
