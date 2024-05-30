@@ -20,6 +20,10 @@ jobs:
           echo "branch_name1=[${{toJSON(inputs.branch_name)}}]"
           echo "branch_name2=[${{inputs.branch_name}}]"
 
+      - name: Setting env variables this could be helping with quotes
+        run: |
+          echo "branch_name=${{inputs.branch_name}}" >> "$GITHUB_OUTPUT"
+          echo "Env variable [${{env.branch_name}}]
 
       - name: Checkout Submodules
         run: |
@@ -44,14 +48,15 @@ jobs:
         run: |
           echo Creating branch1  ${{toJSON(inputs.branch_name)}}
           echo Creating branch2 "${{toJSON(inputs.branch_name)}}"
-          git checkout -b ${{toJSON(inputs.branch_name)}}
+          echo Creating branch3 ${{env.branch_name}}
+          git checkout -b ${{env.branch_name}}
           git status
 
       - name: Push new branch
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ github.token }}
-          branch: ${{toJSON(inputs.branch_name)}}
+          branch: ${{env.branch_name}}
 
       - name: Fetch remote branches of submodule
         run: |
@@ -63,4 +68,4 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ github.token }}
-          branch: ${{ github.ref }}
+          branch: ${{env.branch_name}}
