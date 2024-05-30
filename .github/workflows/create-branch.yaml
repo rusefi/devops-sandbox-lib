@@ -23,7 +23,7 @@ jobs:
       - name: Setting env variables this could be helping with quotes
         run: |
           echo "branch_name=${{inputs.branch_name}}" >> $GITHUB_ENV
-          echo "Env variable [${{env.branch_name}}]
+          echo "Env variable [${{env.branch_name}}"
 
       - name: Checkout Submodules
         run: |
