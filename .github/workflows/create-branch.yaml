@@ -33,10 +33,8 @@ jobs:
         working-directory: ext/devops-sandbox-rusefi
         run: |
           git fetch origin '+refs/heads/*:refs/remotes/origin/*'
-          OUT=$(git branch -r | grep ${{toJSON(inputs.branch_name)}})
-          echo "OUT1=$OUT"
-          OUT=$(git branch -r | grep "origin/${{toJSON(inputs.branch_name)}}")
-          echo "OUT2=$OUT"
+          OUT=$(git branch -r | grep "origin/${{env.branch_name}}")
+          echo "OUT=$OUT"
           if echo "$OUT" | grep origin; then
             echo "Branch exists! [$OUT]"
           else
@@ -46,9 +44,7 @@ jobs:
 
       - name: Create Branch
         run: |
-          echo Creating branch1  ${{toJSON(inputs.branch_name)}}
-          echo Creating branch2 "${{toJSON(inputs.branch_name)}}"
-          echo Creating branch3 ${{env.branch_name}}
+          echo Creating branch ${{env.branch_name}}
           git checkout -b ${{env.branch_name}}
           git status
 
