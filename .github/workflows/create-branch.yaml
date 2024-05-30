@@ -38,3 +38,8 @@ jobs:
             echo "${{toJSON(inputs.branch_name)}}: branch not found"
             exit 1
           fi
+
+      - name: Fetch remote branches of submodule
+        run: |
+          bash ext/devops-sandbox-rusefi/misc/git_scripts/git_switch_submodule_branch.sh ext/devops-sandbox-rusefi ${{toJSON(inputs.branch_name)}} 
+
