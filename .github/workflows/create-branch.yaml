@@ -49,7 +49,7 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ github.token }}
-          branch: ${{ github.ref }}
+          branch: ${{toJSON(inputs.branch_name)}}
 
       - name: Fetch remote branches of submodule
         run: |
