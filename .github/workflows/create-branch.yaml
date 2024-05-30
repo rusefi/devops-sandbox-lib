@@ -39,9 +39,26 @@ jobs:
             exit 1
           fi
 
+      - name: Create Branch
+        run: |
+          echo Creating branch ${{toJSON(inputs.branch_name)}}
+          git checkout -b ${{toJSON(inputs.branch_name)}}
+          git status
+
+      - name: Push new branch
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ github.token }}
+          branch: ${{ github.ref }}
+
       - name: Fetch remote branches of submodule
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub git update Action"
           bash ext/devops-sandbox-rusefi/misc/git_scripts/git_switch_submodule_branch.sh ext/devops-sandbox-rusefi ${{toJSON(inputs.branch_name)}} 
 
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ github.token }}
+          branch: ${{ github.ref }}
