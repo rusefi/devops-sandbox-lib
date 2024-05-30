@@ -1,0 +1,20 @@
+name: rusefi branches
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Checkout Submodules
+        run: |
+          git submodule update --init --depth=1 ext/devops-sandbox-rusefi
+
+      - name: Print branches
+        working-directory: ext/devops-sandbox-rusefi
+        run: |
+          git for-each-ref --count=30 --sort=-committerdate refs/ --format='%(refname:short)'
