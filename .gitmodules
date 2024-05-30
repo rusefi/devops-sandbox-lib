@@ -1,3 +1,4 @@
 [submodule "ext/devops-sandbox-rusefi"]
 	path = ext/devops-sandbox-rusefi
 	url = https://github.com/rusefi/devops-sandbox-rusefi
+	branch = lts-1
