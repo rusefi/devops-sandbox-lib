@@ -17,4 +17,18 @@ jobs:
 
       - name: Echo Inputs
         run: |
-          echo ${{toJSON(inputs.branch_name)}}
+          echo "branch_name=[${{toJSON(inputs.branch_name)}}]"
+
+
+      - name: Checkout Submodules
+        run: |
+          git submodule update --init --depth=1 ext/devops-sandbox-rusefi
+
+      - name: Fetch remote branches of submodule
+        working-directory: ext/devops-sandbox-rusefi
+        run: |
+          git fetch origin '+refs/heads/*:refs/remotes/origin/*'
+          OUT=$(git branch -r | grep ${{toJSON(inputs.branch_name)}})
+          echo "OUT1=$OUT"
+          OUT=$(git branch -r | grep "heads/${{toJSON(inputs.branch_name)}}")
+          echo "OUT2=$OUT"
