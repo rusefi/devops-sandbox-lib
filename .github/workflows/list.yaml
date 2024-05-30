@@ -23,4 +23,7 @@ jobs:
       - name: Print submodule branches
         working-directory: ext/devops-sandbox-rusefi
         run: |
+          echo one:
+          git ls-remote --heads
+          echo two:
           git for-each-ref --count=30 --sort=-committerdate refs/ --format='%(refname:short)'
