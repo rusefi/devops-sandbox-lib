@@ -1,6 +1,7 @@
 name: rusefi branches
 
 on:
+  push:
   workflow_dispatch:
 
 jobs:
